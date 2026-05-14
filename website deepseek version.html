@@ -2,19 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Spice Dice | 3D Creative Portfolio — Filmmaker & Content Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Spice Dice | Filmmaker · Photographer · Content Creator</title>
   <!-- Google Fonts + Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Three.js core -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-      }
-    }
-  </script>
   <style>
     * {
       margin: 0;
@@ -23,243 +15,236 @@
     }
 
     body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: #05050F;
-      color: #f0f0f0;
-      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      background: #0a0a1a;
+      color: #fff;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
-    /* energetic but professional color palette */
+    /* colorful energetic accents */
     :root {
-      --coral: #FF5F6D;
-      --sunset: #FFC371;
-      --electric-violet: #8A2BE2;
-      --cyan-glow: #00E5FF;
-      --deep-purple: #1B0B2E;
-      --glass-bg: rgba(15, 15, 35, 0.55);
-      --glass-border: rgba(255, 95, 109, 0.3);
+      --neon-pink: #ff2d75;
+      --electric-yellow: #ffd700;
+      --cyan-pop: #00f2fe;
+      --purple-glow: #b624ff;
+      --orange-blast: #ff7e05;
+      --bg-dark: #0e0e1e;
     }
 
-    /* custom cursor & scroll */
+    /* custom scroll */
     ::-webkit-scrollbar {
-      width: 6px;
+      width: 10px;
     }
     ::-webkit-scrollbar-track {
-      background: #0a0a14;
+      background: #1e1e2e;
     }
     ::-webkit-scrollbar-thumb {
-      background: var(--coral);
-      border-radius: 10px;
+      background: var(--neon-pink);
+      border-radius: 20px;
     }
 
-    /* 3D canvas background */
-    #canvas-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* main content layer */
-    .content {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* glassmorphism navbar */
-    .navbar {
-      position: sticky;
-      top: 20px;
-      margin: 0 5%;
-      background: rgba(10, 10, 20, 0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 80px;
-      padding: 0.8rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      border: 1px solid rgba(255, 95, 109, 0.4);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--coral), var(--sunset));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.02em;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
-      font-size: 1rem;
-    }
-    .nav-links a:hover {
-      color: var(--coral);
-      text-shadow: 0 0 8px rgba(255,95,109,0.6);
-    }
-    .menu-icon {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    /* sections styling */
+    /* sections */
     section {
-      padding: 100px 5%;
+      padding: 80px 5%;
       position: relative;
     }
+
     .container {
       max-width: 1300px;
       margin: 0 auto;
     }
 
-    /* hero with 3d overlap */
+    /* Hero video section */
     .hero {
-      min-height: 90vh;
+      height: 100vh;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding: 0 5%;
+      overflow: hidden;
+    }
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.65) saturate(1.2);
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 10%, rgba(255,45,117,0.2), rgba(0,0,0,0.7));
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 900px;
     }
     .hero-content h1 {
-      font-size: 5.5rem;
+      font-size: 5rem;
       font-weight: 800;
-      background: linear-gradient(125deg, #FF5F6D, #FFC371, #C850C0, #00E5FF);
-      background-size: 300% 300%;
+      background: linear-gradient(135deg, var(--neon-pink), var(--electric-yellow), var(--cyan-pop));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: gradientShift 8s ease infinite;
       margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .hero-glow {
-      font-size: 1.4rem;
-      color: #ddd;
+    .hero-content .tagline {
+      font-size: 1.5rem;
+      font-weight: 500;
       margin-bottom: 2rem;
-      backdrop-filter: blur(5px);
+      color: #f0f0f0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .btn-group {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.2rem;
       justify-content: center;
       flex-wrap: wrap;
     }
     .btn {
-      padding: 14px 36px;
-      border-radius: 40px;
-      font-weight: 600;
-      transition: all 0.3s ease;
+      padding: 14px 32px;
+      font-weight: 700;
+      border-radius: 60px;
       text-decoration: none;
-      backdrop-filter: blur(4px);
+      transition: 0.3s ease;
+      display: inline-block;
+      font-size: 1rem;
     }
     .btn-primary {
-      background: linear-gradient(95deg, var(--coral), var(--electric-violet));
+      background: linear-gradient(95deg, var(--neon-pink), var(--purple-glow));
       color: white;
+      box-shadow: 0 8px 20px rgba(255,45,117,0.4);
       border: none;
-      box-shadow: 0 8px 20px rgba(138,43,226,0.4);
     }
     .btn-primary:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(255,95,109,0.6);
+      box-shadow: 0 15px 30px rgba(255,45,117,0.6);
     }
     .btn-outline {
-      border: 1.5px solid var(--cyan-glow);
-      color: var(--cyan-glow);
-      background: rgba(0,0,0,0.3);
+      border: 2px solid var(--electric-yellow);
+      color: var(--electric-yellow);
+      background: transparent;
     }
     .btn-outline:hover {
-      background: var(--cyan-glow);
-      color: #0a0a0a;
+      background: var(--electric-yellow);
+      color: #0a0a1a;
+      border-color: var(--electric-yellow);
     }
 
+    /* section titles */
     .section-title {
-      font-size: 3rem;
-      font-weight: 700;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
       text-align: center;
-      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      width: 100%;
     }
     .section-title span {
-      background: linear-gradient(120deg, var(--coral), var(--sunset));
+      background: linear-gradient(120deg, var(--neon-pink), var(--cyan-pop));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
     .title-decor {
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--coral), var(--cyan-glow));
-      margin: 0.5rem auto 3rem auto;
-      border-radius: 2px;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--neon-pink), var(--electric-yellow));
+      margin: 0.5rem auto 2rem auto;
+      border-radius: 4px;
     }
 
-    /* campaign cards with 3d hover */
+    /* campaigns grid (social media campaigns & case studies) */
     .campaign-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
     .campaign-card {
-      background: rgba(20, 20, 40, 0.65);
-      backdrop-filter: blur(10px);
+      background: rgba(20, 20, 40, 0.7);
+      backdrop-filter: blur(4px);
       border-radius: 32px;
       overflow: hidden;
+      transition: 0.25s ease;
       border: 1px solid rgba(255,255,255,0.1);
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      transform-style: preserve-3d;
+      box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5);
     }
     .campaign-card:hover {
-      transform: translateY(-12px) rotateX(2deg);
-      border-color: var(--coral);
-      box-shadow: 0 25px 40px rgba(0,0,0,0.4), 0 0 20px rgba(255,95,109,0.3);
+      transform: scale(1.02);
+      border-color: var(--neon-pink);
     }
-    .campaign-vid {
-      height: 220px;
+    .campaign-img {
       width: 100%;
+      height: 220px;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 3rem;
+    }
+    .campaign-img video, .campaign-img img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
     .campaign-info {
-      padding: 1.8rem;
+      padding: 1.5rem;
+    }
+    .campaign-info h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+      color: var(--electric-yellow);
+    }
+    .campaign-info p {
+      color: #ddd;
+      line-height: 1.4;
     }
     .stats {
       margin-top: 1rem;
-      color: var(--cyan-glow);
-      font-weight: 500;
+      display: flex;
+      gap: 1rem;
+      font-weight: 600;
+      color: var(--cyan-pop);
     }
 
-    /* youtube & about glass cards */
-    .glass-card {
-      background: rgba(15, 15, 35, 0.6);
-      backdrop-filter: blur(14px);
-      border-radius: 48px;
+    /* YouTube channel section */
+    .youtube-section {
+      background: linear-gradient(145deg, #0b0b1a, #12122b);
+      border-radius: 50px;
       padding: 2.5rem;
-      border: 1px solid rgba(255, 195, 113, 0.3);
+      margin-top: 1rem;
     }
     .youtube-flex {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
       align-items: center;
+      justify-content: space-between;
+    }
+    .youtube-text {
+      flex: 1;
+    }
+    .youtube-text h3 {
+      font-size: 2rem;
+      color: #ff3b3b;
     }
     .yt-btn {
-      background: #FF0000;
+      background: #ff0000;
       color: white;
       padding: 12px 28px;
       border-radius: 40px;
@@ -267,356 +252,416 @@
       align-items: center;
       gap: 12px;
       font-weight: bold;
+      transition: 0.2s;
       text-decoration: none;
+    }
+    .yt-btn:hover {
+      background: #cc0000;
+      transform: scale(1.02);
+    }
+    .placeholder-video-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .vid-placeholder {
+      background: #222;
+      border-radius: 24px;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      background: #2a2a3c;
+      cursor: pointer;
       transition: 0.2s;
     }
-    .testimonial-slider {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+    .vid-placeholder i {
+      font-size: 3rem;
+      color: var(--neon-pink);
     }
-    .testimonial-item {
-      background: rgba(0,0,0,0.5);
+
+    /* about & testimonials grid */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-text {
+      flex: 1.2;
+    }
+    .about-text p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .skill-badge {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .badge {
+      background: rgba(255,45,117,0.2);
+      border: 1px solid var(--neon-pink);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+    .testimonial-card {
+      background: rgba(25, 25, 45, 0.8);
       backdrop-filter: blur(8px);
       padding: 2rem;
       border-radius: 32px;
-      border-left: 5px solid var(--coral);
+      border-left: 6px solid var(--electric-yellow);
+      margin: 1rem 0;
+    }
+    .testimonial-card i {
+      color: var(--electric-yellow);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .testimonial-card p {
+      font-style: italic;
+    }
+    .client-name {
+      margin-top: 1rem;
+      font-weight: 700;
+      color: var(--cyan-pop);
     }
 
-    /* contact+booking with 3d vibe */
+    /* contact + booking combined row */
     .contact-booking {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
+      justify-content: space-between;
     }
-    .form-card {
-      flex: 1;
-      background: rgba(10,10,25,0.7);
-      backdrop-filter: blur(12px);
+    .contact-form-box, .booking-box {
+      background: rgba(15, 15, 30, 0.7);
+      backdrop-filter: blur(8px);
       padding: 2rem;
       border-radius: 40px;
-      border: 1px solid var(--glass-border);
+      flex: 1;
+      min-width: 260px;
+      border: 1px solid rgba(255, 45, 117, 0.3);
     }
-    input, textarea, select {
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    input, textarea {
       width: 100%;
       padding: 14px 18px;
-      background: #111122;
-      border: 1px solid #2a2a44;
-      border-radius: 30px;
+      background: #1e1e30;
+      border: 1px solid #333;
+      border-radius: 40px;
       color: white;
       font-family: inherit;
-      margin-top: 8px;
+      outline: none;
     }
-    button {
-      background: linear-gradient(95deg, var(--coral), var(--electric-violet));
+    input:focus, textarea:focus {
+      border-color: var(--neon-pink);
+    }
+    button[type="submit"] {
+      background: linear-gradient(95deg, var(--neon-pink), var(--purple-glow));
       border: none;
-      padding: 12px 24px;
+      padding: 12px 28px;
       border-radius: 40px;
       font-weight: bold;
       color: white;
       cursor: pointer;
+      transition: 0.2s;
     }
-    .whatsapp-btn {
+    .whatsapp-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: #25D366;
       padding: 12px 24px;
       border-radius: 40px;
       text-decoration: none;
       color: white;
       margin-top: 1rem;
+      font-weight: 600;
+    }
+    .booking-box h3, .contact-form-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
     }
     footer {
       text-align: center;
       padding: 2rem;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(8px);
+      background: #05050f;
+      border-top: 1px solid #ff2d7522;
     }
-    @media (max-width: 800px) {
-      .navbar { margin: 10px 4%; padding: 0.6rem 1.2rem; }
-      .nav-links { display: none; }
-      .menu-icon { display: block; }
-      .hero-content h1 { font-size: 2.8rem; }
+    @media (max-width: 780px) {
+      .hero-content h1 { font-size: 3rem; }
       .section-title { font-size: 2rem; }
+      .campaign-grid { grid-template-columns: 1fr; }
+      .youtube-flex { flex-direction: column; }
     }
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #0a0a1ae0;
-      backdrop-filter: blur(20px);
-      z-index: 200;
+    .nav-links {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
       gap: 2rem;
-      transform: translateX(100%);
-      transition: 0.3s;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      background: #0e0e1ee0;
+      backdrop-filter: blur(12px);
+      z-index: 99;
+      font-weight: 600;
     }
-    .mobile-menu.active {
-      transform: translateX(0);
-    }
-    .mobile-menu a {
+    .nav-links a {
       color: white;
-      font-size: 2rem;
       text-decoration: none;
+      transition: 0.2s;
     }
-    .close-menu {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      font-size: 2rem;
-      cursor: pointer;
-    }
+    .nav-links a:hover { color: var(--neon-pink); }
   </style>
 </head>
 <body>
 
-<div id="canvas-container"></div>
-
-<div class="content">
-  <div class="navbar">
-    <div class="logo">SPICE DICE</div>
-    <div class="nav-links">
-      <a href="#home">HOME</a>
-      <a href="#campaigns">CAMPAIGNS</a>
-      <a href="#youtube">YOUTUBE</a>
-      <a href="#about">ABOUT</a>
-      <a href="#testimonials">VOICES</a>
-      <a href="#contact">BOOK</a>
-    </div>
-    <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="close-menu" id="closeMenu"><i class="fas fa-times"></i></div>
-    <a href="#home">HOME</a>
-    <a href="#campaigns">CAMPAIGNS</a>
-    <a href="#youtube">YOUTUBE</a>
-    <a href="#about">ABOUT</a>
-    <a href="#testimonials">VOICES</a>
-    <a href="#contact">BOOK</a>
-  </div>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>SPICE DICE</h1>
-        <div class="hero-glow">Filmmaker · Photographer · Social Media Architect · Content Alchemist</div>
-        <div class="btn-group">
-          <a href="#contact" class="btn btn-primary"><i class="fas fa-calendar-alt"></i> Book a Session</a>
-          <a href="#campaigns" class="btn btn-outline"><i class="fas fa-play-circle"></i> Explore Work</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Social Campaigns + Case Studies -->
-  <section id="campaigns">
-    <div class="container">
-      <h2 class="section-title"><span>Viral</span> Campaigns & Case Studies</h2>
-      <div class="title-decor"></div>
-      <div class="campaign-grid">
-        <div class="campaign-card">
-          <video class="campaign-vid" autoplay muted loop playsinline><source src="https://cdn.pixabay.com/video/2023/07/05/170742-840963829_large.mp4" type="video/mp4"></video>
-          <div class="campaign-info"><h3>#NeonDreams</h3><p>IG Reels + TikTok challenge: 4.2M views, 890% engagement spike. UGC masterpiece.</p><div class="stats"><i class="fas fa-chart-line"></i> +267% followers</div></div>
-        </div>
-        <div class="campaign-card">
-          <video class="campaign-vid" autoplay muted loop playsinline><source src="https://cdn.pixabay.com/video/2022/11/15/140010-773835359_large.mp4" type="video/mp4"></video>
-          <div class="campaign-info"><h3>Future Beauty</h3><p>Influencer strategy & content production, 1.8M reach, featured in AdWeek.</p><div class="stats"><i class="fas fa-trophy"></i> Best Campaign '24</div></div>
-        </div>
-        <div class="campaign-card">
-          <video class="campaign-vid" autoplay muted loop playsinline><source src="https://cdn.pixabay.com/video/2021/09/12/89460-603127888_large.mp4" type="video/mp4"></video>
-          <div class="campaign-info"><h3>Retro Replay</h3><p>YouTube Shorts & Pinterest strategy, 2.3M organic impressions, 40% conversion lift.</p><div class="stats"><i class="fas fa-fire"></i> Trending #1 week</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- YouTube Channel -->
-  <section id="youtube">
-    <div class="container glass-card">
-      <div class="youtube-flex">
-        <div><h2 style="font-size: 2rem;"><i class="fab fa-youtube" style="color:#FF0000;"></i> Spice Dice on YT</h2><p style="margin:1rem 0">Cinematic breakdowns, creative tutorials & viral short films. Join 80k+ creators.</p><a href="#" class="yt-btn" target="_blank"><i class="fab fa-youtube"></i> Subscribe Now</a></div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; flex:1"><div style="background:#2a2a3a; border-radius: 28px; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center"><i class="fas fa-play-circle fa-3x" style="color:var(--coral)"></i></div><div style="background:#2a2a3a; border-radius: 28px; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center"><i class="fas fa-camera fa-3x" style="color:var(--sunset)"></i></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About + Testimonials blend -->
-  <section id="about">
-    <div class="container">
-      <div style="display: flex; flex-wrap: wrap; gap: 2.5rem;">
-        <div style="flex: 1.2;">
-          <h2 class="section-title" style="text-align:left;"><span>Spice Dice</span> Essence</h2>
-          <p style="font-size:1.2rem; line-height:1.5">Award-winning filmmaker & digital strategist. I fuse high-energy visuals with emotional storytelling. From explosive social campaigns to cinematic brand films, I bring the heat. Featured in Forbes 30 under 30 (creator economy) & Vogue Business.</p>
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap:wrap"><span style="background:#FF5F6D20; border:1px solid var(--coral); border-radius:40px; padding:6px 18px;">🎬 Director</span><span style="background:#00E5FF20; border:1px solid var(--cyan-glow); border-radius:40px; padding:6px 18px;">📸 Photo Art</span><span style="background:#FFC37120; border:1px solid var(--sunset); border-radius:40px; padding:6px 18px;">📈 Growth Hacker</span></div>
-        </div>
-        <div style="flex: 1;">
-          <div class="testimonial-item"><i class="fas fa-quote-left fa-2x" style="color:var(--coral)"></i><p>"Spice Dice turned our boring feed into a viral machine. She's a creative wizard with data-driven magic."</p><h4 style="margin-top:1rem">— Elena V., Global Brand Lead</h4></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials dedicated section -->
-  <section id="testimonials">
-    <div class="container">
-      <h2 class="section-title"><span>Kind</span> Words</h2>
-      <div class="title-decor"></div>
-      <div class="testimonial-slider">
-        <div class="testimonial-item"><i class="fas fa-star" style="color: gold;"></i><p>"The most visionary content creator I've ever worked with. Her energy is unmatched!"</p><h4>— Marcus T., Music Producer</h4></div>
-        <div class="testimonial-item"><i class="fas fa-crown"></i><p>"Our social media presence exploded after Spice took over. She’s a pure genius."</p><h4>— Lexi Beauty</h4></div>
-        <div class="testimonial-item"><i class="fas fa-film"></i><p>"Her film direction & social media strategy helped us win Webby award."</p><h4>— Creative Agency</h4></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact & Client Booking -->
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title"><span>Let's Create</span> Magic</h2>
-      <div class="title-decor"></div>
-      <div class="contact-booking">
-        <div class="form-card">
-          <h3><i class="fas fa-paper-plane"></i> Direct Inquiry</h3>
-          <form id="proContactForm">
-            <input type="text" placeholder="Full Name" id="nameInput" required><br><br>
-            <input type="email" placeholder="Email" id="emailInput" required><br><br>
-            <textarea rows="3" placeholder="Project idea / collaboration"></textarea><br><br>
-            <button type="submit">Send Message <i class="fas fa-arrow-right"></i></button>
-          </form>
-          <a href="#" id="whatsappDemoBtn" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp: +1 (555) 789-2025</a>
-        </div>
-        <div class="form-card">
-          <h3><i class="fas fa-calendar-check"></i> Client Booking</h3>
-          <p>Select package & reserve your slot — immediate confirmation via WhatsApp/email.</p>
-          <select id="serviceSelect"><option>✨ Full Production (Film/Photo)</option><option>📱 Social Media Management (Monthly)</option><option>🎨 Content Creator Package (10 Reels + Posts)</option><option>🎥 YouTube Channel Audit & Strategy</option></select>
-          <button id="bookingTrigger" style="margin-top: 1.5rem; width:100%">Request Booking <i class="fas fa-clock"></i></button>
-          <p style="margin-top: 1rem; font-size:0.8rem;">⭐ Spice Dice responds within 12 hours. Let's ignite your brand.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer>
-    <p>© 2025 Spice Dice — Filmmaker & Creative Director. 3D interactive experience.</p>
-    <div style="margin-top: 0.5rem;"><i class="fab fa-instagram"></i> <i class="fab fa-tiktok"></i> <i class="fab fa-linkedin"></i></div>
-  </footer>
+<!-- Sticky Nav -->
+<div class="nav-links">
+  <a href="#home">HOME</a>
+  <a href="#campaigns">CAMPAIGNS</a>
+  <a href="#youtube">YOUTUBE</a>
+  <a href="#about">ABOUT</a>
+  <a href="#testimonials">TESTIMONIALS</a>
+  <a href="#contact">CONTACT</a>
 </div>
 
-<script type="module">
-  import * as THREE from 'three';
+<!-- Hero with video background -->
+<section id="home" class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/video/2020/10/01/50942-466590716_large.mp4" type="video/mp4">
+    <!-- fallback colorful energetic cinematic stock video -->
+    Your browser does not support the video tag.
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>SPICE DICE</h1>
+    <div class="tagline">Filmmaker · Photographer · Social Media Manager · Content Creator</div>
+    <div class="btn-group">
+      <a href="#contact" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Now</a>
+      <a href="#campaigns" class="btn btn-outline"><i class="fas fa-play-circle"></i> View Work</a>
+    </div>
+  </div>
+</section>
 
-  const container = document.getElementById('canvas-container');
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x05050F);
-  scene.fog = new THREE.FogExp2(0x05050F, 0.008);
+<!-- Social Media Campaigns + Case Studies -->
+<section id="campaigns">
+  <div class="container">
+    <h2 class="section-title"><span>Social Media Campaigns</span> & Case Studies</h2>
+    <div class="title-decor"></div>
+    <div class="campaign-grid">
+      <div class="campaign-card">
+        <div class="campaign-img">
+          <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover">
+            <source src="https://cdn.pixabay.com/video/2022/03/28/112633-694251239_tiny.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="campaign-info">
+          <h3>#GlowUpChallenge</h3>
+          <p>TikTok & IG campaign · 2.3M+ reach, 340% engagement boost. Viral transitions & UGC.</p>
+          <div class="stats"><i class="fas fa-chart-line"></i> +187% followers</div>
+        </div>
+      </div>
+      <div class="campaign-card">
+        <div class="campaign-img">
+          <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover">
+            <source src="https://cdn.pixabay.com/video/2019/04/09/22842-331574153_tiny.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="campaign-info">
+          <h3>EcoWarrior Series</h3>
+          <p>YouTube + Instagram Reels: sustainability case study with 500k+ shares, brand collab.</p>
+          <div class="stats"><i class="fas fa-trophy"></i> Best Social Campaign 2024</div>
+        </div>
+      </div>
+      <div class="campaign-card">
+        <div class="campaign-img">
+          <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover">
+            <source src="https://cdn.pixabay.com/video/2020/07/17/45047-443579443_tiny.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="campaign-info">
+          <h3>Fashion Fest '24</h3>
+          <p>Multi-platform content strategy → 1.2M impressions, +62% conversion rate for client.</p>
+          <div class="stats"><i class="fas fa-fire"></i> Trending no.1 for 3 days</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 2, 12);
-  
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  container.appendChild(renderer.domElement);
+<!-- YouTube Channel Section -->
+<section id="youtube">
+  <div class="container youtube-section">
+    <div class="youtube-flex">
+      <div class="youtube-text">
+        <h3><i class="fab fa-youtube"></i> Spice Dice YouTube</h3>
+        <p style="margin: 1rem 0; font-size:1.1rem">Cinematic vlogs, tutorials, and behind the scenes of my creative productions. Subscribe for high-energy storytelling.</p>
+        <a href="#" class="yt-btn" target="_blank"><i class="fab fa-youtube"></i> Subscribe on YouTube</a>
+      </div>
+      <div class="placeholder-video-grid">
+        <div class="vid-placeholder"><i class="fas fa-play-circle"></i></div>
+        <div class="vid-placeholder"><i class="fas fa-camera"></i></div>
+        <div class="vid-placeholder"><i class="fas fa-film"></i></div>
+        <div class="vid-placeholder"><i class="fas fa-video"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0x222222);
-  scene.add(ambientLight);
-  const pointLight = new THREE.PointLight(0xff5f6d, 1, 20);
-  pointLight.position.set(3, 4, 5);
-  scene.add(pointLight);
-  const backLight = new THREE.PointLight(0x00e5ff, 0.6);
-  backLight.position.set(-2, 1, -4);
-  scene.add(backLight);
-  const fillLight = new THREE.DirectionalLight(0xffc371, 0.5);
-  fillLight.position.set(1, 2, 1);
-  scene.add(fillLight);
+<!-- About + Testimonials combo (two columns) -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About <span>Spice Dice</span></h2>
+    <div class="title-decor"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>🔥 <strong>Spice Dice</strong> is a multi-disciplinary creative — filmmaker, photographer, and digital strategist. I blend vibrant visuals with storytelling that ignites engagement. With 6+ years of experience directing commercial & lifestyle content, I help brands and individuals stand out.</p>
+        <p>📸 From cinematic brand films to scroll-stopping social assets, I deliver high-energy results. Also certified in social media management (Meta, TikTok Ads) and content strategy.</p>
+        <div class="skill-badge">
+          <span class="badge">Cinematography</span>
+          <span class="badge">Lightroom</span>
+          <span class="badge">Premiere Pro</span>
+          <span class="badge">Social Analytics</span>
+          <span class="badge">Creative Direction</span>
+        </div>
+      </div>
+      <div style="flex:0.8">
+        <div class="testimonial-card">
+          <i class="fas fa-quote-right"></i>
+          <p>"Spice Dice transformed our social presence! Her energy and vision brought our brand to life. Campaigns went viral instantly!"</p>
+          <div class="client-name">— Mia Chen, Glow Cosmetics</div>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-star" style="color:#ffd700"></i>
+          <p>"The most talented content creator I've worked with. She directed my music video and managed Instagram – pure magic."</p>
+          <div class="client-name">— DJ RAYZ, Musician</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Core 3D Object: Torus Knot with vibrant material + floating cubes
-  const knotGeo = new THREE.TorusKnotGeometry(0.9, 0.28, 180, 24, 3, 4);
-  const knotMat = new THREE.MeshStandardMaterial({ color: 0xff5f6d, emissive: 0x441133, roughness: 0.3, metalness: 0.7, emissiveIntensity: 0.8 });
-  const knot = new THREE.Mesh(knotGeo, knotMat);
-  scene.add(knot);
+<!-- Testimonials extra section (dedicated) -->
+<section id="testimonials">
+  <div class="container">
+    <h2 class="section-title">What <span>Clients Say</span></h2>
+    <div class="title-decor"></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 2rem;">
+      <div class="testimonial-card">
+        <i class="fas fa-crown"></i>
+        <p>"Her photography & social media strategy doubled our organic engagement within weeks. Absolute pro."</p>
+        <div class="client-name">— Oliver T., Fashion Label</div>
+      </div>
+      <div class="testimonial-card">
+        <i class="fas fa-camera-retro"></i>
+        <p>"Spice Dice is a powerhouse. Creative, fast, and knows how to create thumb-stopping content."</p>
+        <div class="client-name">— Nina K., Content Agency</div>
+      </div>
+      <div class="testimonial-card">
+        <i class="fas fa-chart-simple"></i>
+        <p>"Our YouTube channel grew 300% after her strategy. Best investment we made this year."</p>
+        <div class="client-name">— Growth Media Co.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Floating Icosahedrons
-  const icoGeo = new THREE.IcosahedronGeometry(0.35, 0);
-  const icoMat = new THREE.MeshStandardMaterial({ color: 0xffc371, emissive: 0xff4400, emissiveIntensity: 0.4 });
-  const ico2 = new THREE.Mesh(icoGeo, icoMat);
-  ico2.position.set(2.2, -0.8, -1.5);
-  scene.add(ico2);
-  
-  const icoMat2 = new THREE.MeshStandardMaterial({ color: 0x00e5ff, emissive: 0x0066aa, emissiveIntensity: 0.5 });
-  const ico3 = new THREE.Mesh(icoGeo, icoMat2);
-  ico3.position.set(-2.0, 1.2, -1.8);
-  scene.add(ico3);
-  
-  const smallSpheres = [];
-  for (let i = 0; i < 60; i++) {
-    const sphereGeo = new THREE.SphereGeometry(0.06, 6, 6);
-    const sphereMat = new THREE.MeshStandardMaterial({ color: 0xffaa55, emissive: 0xcc5533 });
-    const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-    sphere.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 8 - 4);
-    scene.add(sphere);
-    smallSpheres.push(sphere);
-  }
-  
-  // glowing ring
-  const ringGeo = new THREE.TorusGeometry(1.4, 0.05, 64, 200);
-  const ringMat = new THREE.MeshStandardMaterial({ color: 0xff5f6d, emissive: 0xff3a4d, emissiveIntensity: 0.7 });
-  const ring = new THREE.Mesh(ringGeo, ringMat);
-  scene.add(ring);
-  
-  let time = 0;
-  function animate() {
-    requestAnimationFrame(animate);
-    time += 0.012;
-    knot.rotation.x = Math.sin(time * 0.5) * 0.5;
-    knot.rotation.y = time * 0.7;
-    knot.rotation.z = time * 0.3;
-    ring.rotation.x = Math.sin(time * 0.4) * 0.3;
-    ring.rotation.y = time * 0.5;
-    ring.rotation.z = time * 0.2;
-    ico2.rotation.x = time;
-    ico2.rotation.y = time * 0.8;
-    ico3.rotation.x = time * 0.6;
-    ico3.rotation.z = time;
-    smallSpheres.forEach((s, idx) => {
-      s.position.x += Math.sin(time + idx) * 0.002;
-      s.position.y += Math.cos(time * 0.7 + idx) * 0.002;
+<!-- Contact + Booking (Client booking + contact form) -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title"><span>Connect</span> & Book</h2>
+    <div class="title-decor"></div>
+    <div class="contact-booking">
+      <!-- Contact form (email + whatsapp) -->
+      <div class="contact-form-box">
+        <h3><i class="fas fa-envelope"></i> Send a message</h3>
+        <form id="contactForm" action="#" method="post">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="3" placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit">Send via Email <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div style="margin-top: 1.8rem;">
+          <a href="https://wa.me/1234567890?text=Hey%20Spice%20Dice%2C%20I%20want%20to%20collaborate!" class="whatsapp-link" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+          <p style="font-size:0.8rem; margin-top:0.8rem;">+1 234 567 890 (example – you can update)</p>
+        </div>
+      </div>
+      <!-- Client Booking special section -->
+      <div class="booking-box">
+        <h3><i class="fas fa-calendar-alt"></i> Client Booking</h3>
+        <p>Ready to spice up your project? Book a discovery call or reserve a production slot.</p>
+        <div style="margin: 1.5rem 0;">
+          <label style="font-weight:600;">Select service:</label>
+          <select id="bookingSelect" style="width:100%; margin-top:8px; padding:12px; border-radius:40px; background:#1e1e30; color:white; border:none;">
+            <option>Film production / Video ad</option>
+            <option>Photoshoot (studio/outdoor)</option>
+            <option>Social media management (monthly)</option>
+            <option>Content creator package</option>
+          </select>
+        </div>
+        <a href="#" class="btn btn-primary" id="mockBookingBtn" style="display: inline-block; text-align: center; width:100%;"><i class="fas fa-clock"></i> Request Booking</a>
+        <p style="margin-top: 1rem; font-size:0.85rem;">📅 You'll receive a confirmation via email/WhatsApp within 24h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Spice Dice — Filmmaker, Photographer & Creative Director. All visuals placeholder / energetic storytelling.</p>
+  <div style="margin-top: 0.6rem;">
+    <i class="fab fa-instagram" style="margin:0 0.5rem; color:var(--neon-pink)"></i>
+    <i class="fab fa-tiktok" style="margin:0 0.5rem; color:var(--cyan-pop)"></i>
+    <i class="fab fa-youtube" style="margin:0 0.5rem; color:#ff0000"></i>
+  </div>
+</footer>
+
+<script>
+  // Simple contact form alert demo + booking button alert
+  const contactForm = document.getElementById('contactForm');
+  if(contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('✨ Thanks Spice Dice fan! Your message has been sent (demo). Spice will reach out via email or WhatsApp shortly!');
+      contactForm.reset();
     });
-    camera.position.x += (0 - camera.position.x) * 0.03;
-    camera.lookAt(0, 0, 0);
-    renderer.render(scene, camera);
   }
-  animate();
 
-  window.addEventListener('resize', onWindowResize, false);
-  function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  const bookingBtn = document.getElementById('mockBookingBtn');
+  if(bookingBtn) {
+    bookingBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const selected = document.getElementById('bookingSelect')?.value || 'service';
+      alert(`🔥 Booking request sent for: ${selected}. Spice Dice will contact you within 24h via WhatsApp or email. Let's create magic!`);
+    });
   }
-</script>
 
-<script type="text/javascript">
-  // Mobile menu
-  const menuIcon = document.getElementById('menuIcon');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const closeMenu = document.getElementById('closeMenu');
-  if(menuIcon) menuIcon.onclick = () => mobileMenu.classList.add('active');
-  if(closeMenu) closeMenu.onclick = () => mobileMenu.classList.remove('active');
-  document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('active')));
-  
-  // form handling
-  document.getElementById('proContactForm')?.addEventListener('submit', (e) => { e.preventDefault(); alert("✨ Thanks Spice Dice! Your message has been received. I'll reply within hours. Let's create magic!"); e.target.reset(); });
-  document.getElementById('bookingTrigger')?.addEventListener('click', () => { const s = document.getElementById('serviceSelect')?.value; alert(`🔥 Booking request for: ${s}. You'll receive a confirmation via WhatsApp/email shortly. Can't wait to work with you!`); });
-  document.getElementById('whatsappDemoBtn')?.addEventListener('click', (e) => { e.preventDefault(); alert("📱 WhatsApp demo: +1 (555) 789-2025 (replace with your actual number). Spice Dice will respond ASAP!"); });
+  // dummy whatsapp number alert for placeholder
+  const whatsappLink = document.querySelector('.whatsapp-link');
+  if(whatsappLink) {
+    whatsappLink.addEventListener('click', function(e) {
+      // just for demo: show note that number is placeholder - we keep original link but also let them know
+      if(!confirm('This is a demo WhatsApp number. You can replace "+1234567890" with your actual number. Continue to open WhatsApp demo?')) {
+        e.preventDefault();
+      }
+    });
+  }
 </script>
 </body>
 </html>
